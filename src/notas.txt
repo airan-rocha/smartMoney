@@ -1,0 +1,164 @@
+Aula 12 min
+
+Site de icones: https://www.flaticon.com/
+
+
+**react navigation - biblioteca para navegação de telas
+**Version: 4x
+
+npm install react-navigation --save
+npm install react-native-gesture-handler react-native-reanimated --save
+-----------------
+
+**Banco de dados Realm
+
+yarn add realm
+npx react-native link realm
+
+------------------
+
+**uuid bliblioteca que gera id string aleatorio.
+**  https://www.npmjs.com/package/uuid
+
+npm install uuid
+------------------
+
+** Cria um componente, como se fosse uma view, onde posso definir cores de fundo para dar o efeito gradient. 
+** https://github.com/react-native-linear-gradient/react-native-linear-gradient#installation
+yarn add react-native-linear-gradient
+-------------------
+
+** https://github.com/oblador/react-native-vector-icons
+yarn add react-native-vector-icons
+
+** se precisar:
+npx react-native link react-native-vector-icons
+
+--------------------
+
+**https://github.com/react-native-svg/react-native-svg
+**converte svg para código do react
+
+yarn add react-native-svg
+
+**Se precisar
+react-native link react-native-svg
+
+---------------------
+** https://github.com/benhurott/react-native-masked-text
+** cria mascara para adicionar cpf, teleforne, moedas, cep ...
+
+yarn add react-native-masked-text
+
+
+----------------
+**instalall:
+yarn global add react-native-rename
+**ou:
+npm install react-native-rename -g
+
+**como usar:
+npx react-native-rename "Smart Money" -b br.com.rochaairan.smartmoney_beta
+
+
+
+*********************************************
+**React Native Box Shadow Generator - cria o codigo para o sobreamento.
+http://tools-network.com/react-native-shadow/react-native-box-shadow
+
+
+*********************************************
+https://resizeappicon.com/
+converte a imagem para vários tamanhos de icones.
+
+*********************************************
+** if de JSX
+** no exemplo abaixo, ira executar o if à variável existir (true).
+{true && (
+    //meu código...
+)}
+
+** no exemplo abaixo, ira executar o if se uma ou outra variável existir (true).
+
+{(true || true) && (
+    //meu código...
+)}
+
+*********************************************
+//Utilizando Props:
+
+//Essa função irá receber duas props nome e idade e ira retornar um texto.
+
+const Aluno = ({nome, idade}) => {
+    return(
+        <View>
+            <Text>O aluno {nome} tem {idade} anos.</Text>
+        </View>
+    )
+}
+
+dentro da função App, você irá chamar a função / componente e irá definir um valor para as props.
+
+<Aluno nome={'Zeninho''} idade={10} />
+
+*********************************************
+Utilizando State:
+
+//deve-se importar o useState
+
+import React, {useState} from 'react';
+
+//deve-se criar uma variável e uma função dentro de um array para setar o valor.
+//Eles serão igual a fução useState() com um valor inicial. No caso abaixo será uma string com o valor Aluno.
+ 
+const [nomeVariavel, setNomeVarialvel] = useState('Aluno');
+
+//O exemplo abaixo cria o componente 'Counter' que irar realizar a soma do valor da state toda vez que o botão contar for pressionado.
+//
+
+const Counter = () => {
+    const [counter, setCounter] = useState(0);
+
+    const count = () => {
+        setCounter(counter + 1);
+    }
+
+    return(
+        <View>
+            <Text style={styles.text}>{counter}</Text>
+            <Button title="contar" onPress={() => count()} />
+            <Button title="Zerar" onPress={() => setCounter(0)} />
+        </View>
+    )
+};
+
+**************************
+
+**Components Core
+**criando containers com a props children
+
+**No arquivo import o container:
+import Container from '/container';
+
+<Container>
+    <Text>Esse é o meu texto do container</Text>
+</Container>
+
+
+**no arquivo de criação do container:
+**a props children irá buscar todos o filhos do container no outro arquivo.
+
+const Container = ({children}) => {
+    <View>
+        <Text>Titulo do container</Text>
+        {childrem}
+    </View>
+}
+
+** O local que a props children ficar, irá exibir os elementos da primeira tela.
+
+**Resultado na tela do app:
+Titulo do container
+Esse é o meu texto do container
+
+*****************************
