@@ -8,41 +8,45 @@ import {getDefaultCategories} from './Categories';
 export const getRealm = async () => {
   const realm = await Realm.open({
     schema: [CategorySchema, EntrySchema],
-    schemaVersion: 2,
+    schemaVersion: 3,
   });
 
+  // dropDB(realm);
   initDB(realm);
 
   return realm;
 };
 
 export const initDB = realm => {
-    // consultar a quantidade de categorias existentes no bd
-    // se = 0
-    //   preencho as categorias
-    // senão
-    //   não faço nada
+  const categoriesLength = realm.objects('Category').length;
+  console.log(`initDB :: categories length: ${categoriesLength}`);
 
-    const categoriesLength = realm.objects('Category').length;
-    console.log(`initDB :: categories length: ${categoriesLength}`);
-  
-    if (categoriesLength === 0) {
-      const categories = getDefaultCategories();
-  
-      console.log('initDB :: initing db...');
-  
-      try {
-        realm.write(() => {
-          categories.forEach(category => {
-            console.log(
-              `initDB :: creating category: ${JSON.stringify(category)}`,
-            );
-  
-            realm.create('Category', category, true);
-          });
+  if (categoriesLength === 0) {
+    const categories = getDefaultCategories();
+
+    console.log('initDB :: initing db...');
+
+    try {
+      realm.write(() => {
+        categories.forEach(category => {
+          console.log(
+            `initDB :: creating category: ${JSON.stringify(category)}`,
+          );
+
+          realm.create('Category', category, true);
         });
-      } catch (error) {}
-    } else {
-      console.log('initDB :: categories already existing... Skypping.');
+      });
+    } catch (error) {
+      console.error(`Erro ao inserir categorias no banco de dados. ERROR: ${error}`)
     }
-  };
+  } else {
+    console.log('initDB :: categories already existing... Skypping.');
+  }
+};
+
+export const dropDB = realm => {
+  console.log('dropDB :: dropping db...');
+  realm.write(() => {
+    realm.deleteAll();
+  });
+};
