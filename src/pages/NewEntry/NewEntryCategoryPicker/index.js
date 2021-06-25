@@ -14,19 +14,13 @@ import Colors from '../../../styles/Colors';
 
 const NewEntryCategoryPicker = ({debit, category, onChangeCategory}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [categories, setCategories] = useState([]);
+  const [debitCategories, setDebitCategories] = useState([]);
+  const [creditCategories, setCreditCategories] = useState([]);
 
   useEffect(() => {
     async function loadCategories() {
-      let data;
-
-      if(debit){
-        data = await getDebitCategories();
-      }else{
-        data = await getCreditCategories();
-      }
-
-      setCategories(data);
+      setDebitCategories(await getDebitCategories());
+      setCreditCategories(await getCreditCategories());
     }
 
     loadCategories();
@@ -56,7 +50,7 @@ const NewEntryCategoryPicker = ({debit, category, onChangeCategory}) => {
       <Modal animationType="slide" transparent={false} visible={modalVisible}>
         <View style={styles.modal}>
           <FlatList
-            data={categories}
+            data={debit ? debitCategories : creditCategories}
             keyExtractor={item => item.id}
             renderItem={({item}) => (
               <TouchableOpacity
