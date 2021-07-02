@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import {View, Button, StyleSheet} from 'react-native';
 
+import ActionFooter, {ActionPrimaryButton, ActionSecondaryButton} from '../../components/Core/ActionFooter';
+
 import BalanceLabel from '../../components/BalanceLabel';
 import NewEntryInput from './NewEntryInput';
 import NewEntryCategoryPicker from './NewEntryCategoryPicker';
 import NewEntryDatePicker from './NewEntryDatePicker';
+import NewEntryDeleteAction from './NewEntryDeleteAction';
 
 import {saveEntry} from '../../services/Entries';
 import {deleteEntry} from '../../services/Entries';
@@ -71,18 +74,20 @@ const NewEntry = ({navigation}) => {
 
         <View style={styles.formActionContainer}>
           <NewEntryDatePicker value={entryAt} onChange={setEntryAt} />
+          <NewEntryDeleteAction entry={entry} onOkPress={onDelete} />
         </View>
       </View>
 
       <View>
-        <Button
-          title={entry.id ? "Atualizar" : "Adicionar"}
-          onPress={() => {
-            isValid() && onSave();
-          }}
-        />
-        {entry.id && <Button title="Excluir" onPress={onDelete} />}
-        <Button title="Cancelar" onPress={onClose} />
+        <ActionFooter>
+          <ActionPrimaryButton
+            title={entry.id ? 'Salvar' : 'Adicionar'}
+            onPress={() => {
+              isValid() && onSave();
+            }}
+          />
+          <ActionSecondaryButton title="Cancelar" onPress={onClose} />
+        </ActionFooter>
       </View>
     </View>
   );
