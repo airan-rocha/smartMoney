@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Picker, StyleSheet, ScrollView, LogBox} from 'react-native';
 
 import ActionFooter, {ActionPrimaryButton} from '../../components/Core/ActionFooter';
@@ -16,7 +16,10 @@ const Report = ({navigation}) => {
       <BalanceLabel />
       <View>
         <Picker>
-          <Picker.Item label="Todas Categorias" />
+          <Picker.Item label="Todas Categorias" value="allcategories"/>
+          <Picker.Item label="Categoria 1" value="categorie1" />
+          <Picker.Item label="Categoria 2" value="categorie2" />
+          <Picker.Item label="Categoria 3" value="categorie3" />
         </Picker>
         <Picker>
           <Picker.Item label="Últimos 7 dias" />
