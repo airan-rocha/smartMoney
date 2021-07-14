@@ -1,5 +1,9 @@
 Aula 19 min
 
+---------
+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
+---------
+
 Site de icones: https://www.flaticon.com/
 
 
@@ -162,3 +166,30 @@ Titulo do container
 Esse é o meu texto do container
 
 *****************************
+Bloquer app para mode retrato (não irá girar na tela):
+No android/app/src/main/AndroidManifest:
+
+<application>
+    ...
+    <activity
+    ...
+    android:screenOrientation="portrait">
+    ...
+    </activity>
+</application>
+
+*****************************
+#LogBox:
+Errors and warnings in development builds are displayed in LogBox inside your app.
+
+*LogBox is automatically disabled in release (production) builds.
+
+#Console Errors and Warnings:
+
+import { LogBox } from 'react-native';
+
+// Ignore log notification by message:
+LogBox.ignoreLogs(['Warning: ...']);
+
+// Ignore all log notifications:
+LogBox.ignoreAllLogs();
