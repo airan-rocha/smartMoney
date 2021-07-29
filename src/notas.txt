@@ -54,6 +54,10 @@ react-native link react-native-svg
 
 yarn add react-native-masked-text
 
+----------------
+http://momentjs.com
+
+biblioteca javascript para trabalho com datas
 
 ----------------
 **instalall:

@@ -23,6 +23,8 @@ const Report = ({navigation}) => {
         </Picker>
         <Picker>
           <Picker.Item label="Últimos 7 dias" />
+          <Picker.Item label="Últimos 15 dias" />
+          <Picker.Item label="Últimos 21 dias" />
         </Picker>
       </View>
 

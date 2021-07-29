@@ -3,10 +3,19 @@ import {Alert} from 'react-native';
 import {getRealm} from './Realm';
 import {getUUID} from '../services/UUID';
 
-export const getEntries = async days => {
-  const realm = await getRealm();
+import moment from '../vendors/moment';
 
-  const entries = realm.objects('Entry').sorted('entryAt', true);
+export const getEntries = async days => {
+  let realm = await getRealm();
+
+  realm = realm.objects('Entry');
+
+  if(days > 0) {
+    const date = moment().subtract(days, 'days').toDate(); //agora - 7 dias
+    realm = realm.filtered('entryAt >= $0', date);
+  }
+
+  const entries = realm.sorted('entryAt', true);
 
   console.log('getEntries :: entries ', JSON.stringify(entries));
 
