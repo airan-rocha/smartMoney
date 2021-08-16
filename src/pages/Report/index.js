@@ -15,6 +15,17 @@ import Colors from '../../styles/Colors';
 const Report = ({navigation}) => {
   const [relativeDaysModalVisible, setRelativeDaysModalVisible] = useState(false)
 
+  const [relativeDays, setRelativeDays] = useState(7);
+
+  const onRelativeDaysPress = item => {
+    setRelativeDays(item);
+    onRelativeDaysClosePress();
+  };
+
+  const onRelativeDaysClosePress = () => {
+    setRelativeDaysModalVisible(false);
+  };
+
   LogBox.ignoreLogs(['Picker']);
   return (
     <View style={styles.container}>
@@ -33,12 +44,12 @@ const Report = ({navigation}) => {
             color={Colors.champagneDark}
           />
         </TouchableOpacity>
-        <RelativeDaysModal isVisible={relativeDaysModalVisible} />
+        <RelativeDaysModal isVisible={relativeDaysModalVisible} onConfirm={onRelativeDaysPress} onCancel={onRelativeDaysClosePress} />
       </View>
 
       <ScrollView>
         <EntrySummary />
-        <EntryList />
+        <EntryList days={relativeDays} />
       </ScrollView>
 
       <ActionFooter>

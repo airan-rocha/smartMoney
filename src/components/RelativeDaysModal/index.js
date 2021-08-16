@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, Modal, FlatList, TouchableOpacity } from 'react-native'
+import Colors from '../../styles/Colors';
 
 import ActionFooter, {ActionPrimaryButton} from '../Core/ActionFooter';
 
@@ -8,13 +9,13 @@ const RelativeDaysModal = ({isVisible, onConfirm, onCancel}) => {
 
     return (
         <Modal animationType="slide" transparent={false} visible={isVisible}>
-            <View>
+            <View style={styles.modal}>
                 <FlatList 
                     data={relativeDays} 
                     keyExtractor={item => item.toString()} 
                     renderItem={({item}) => (
-                        <TouchableOpacity onPress={() => onConfirm(item)}>
-                            <Text>{`${item} dias`}</Text>
+                        <TouchableOpacity style={styles.modalItem} onPress={() => onConfirm(item)}>
+                            <Text style={styles.modalItemText} >{`${item} dias`}</Text>
                         </TouchableOpacity>
                     )}
                 />
@@ -27,6 +28,24 @@ const RelativeDaysModal = ({isVisible, onConfirm, onCancel}) => {
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    modal: {
+        flex: 1,
+        backgroundColor: Colors.background,
+    },
+    modalItem: {
+        backgroundColor: Colors.asphalt,
+        borderRadius: 15,
+        marginVertical: 10,
+        marginHorizontal: 20,
+        paddingVertical: 20,
+        paddingHorizontal: 20,
+    },
+    modalItemText: {
+        fontSize: 22,
+        color: Colors.white,
+        textAlign: 'center',
+    },
+})
 
 export default RelativeDaysModal;
