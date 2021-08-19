@@ -13,9 +13,14 @@ import RelativeDaysModal from '../../components/RelativeDaysModal';
 import Colors from '../../styles/Colors';
 
 const Report = ({navigation}) => {
-  const [relativeDaysModalVisible, setRelativeDaysModalVisible] = useState(false)
+  const [relativeDaysModalVisible, setRelativeDaysModalVisible] = useState(false);
+  const [categoryModalVisible, setCategoryModalVisible] = useState(false);
 
   const [relativeDays, setRelativeDays] = useState(7);
+  const [category, setCategory] = useState({
+    id: null,
+    name: 'Todas as Categorias',
+  });
 
   const onRelativeDaysPress = item => {
     setRelativeDays(item);
@@ -30,21 +35,38 @@ const Report = ({navigation}) => {
   return (
     <View style={styles.container}>
       <BalanceLabel />
-      <View>
+
+      <View style={styles.filtersContainer}>
         <TouchableOpacity
           style={styles.filterButton}
           onPress={() => {
             setRelativeDaysModalVisible(true);
           }}
           >
-          <Text style={styles.filterButtonText}>Últimos 7 dias</Text>
+          <Text style={styles.filterButtonText}>{`Últimos ${relativeDays} dias`}</Text>
           <Icon
             name="keyboard-arrow-down"
             size={20}
             color={Colors.champagneDark}
           />
         </TouchableOpacity>
-        <RelativeDaysModal isVisible={relativeDaysModalVisible} onConfirm={onRelativeDaysPress} onCancel={onRelativeDaysClosePress} />
+        <RelativeDaysModal 
+          isVisible={relativeDaysModalVisible} 
+          onConfirm={onRelativeDaysPress} 
+          onCancel={onRelativeDaysClosePress}
+        />
+
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => {}}
+          >
+          <Text style={styles.filterButtonText}>{category.name}</Text>
+          <Icon
+            name="keyboard-arrow-down"
+            size={20}
+            color={Colors.champagneDark}
+          />
+        </TouchableOpacity>
       </View>
 
       <ScrollView>
@@ -68,6 +90,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
+  },
+  filtersContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 5,
   },
   filterButton: {
     flexDirection: 'row',
