@@ -9,6 +9,7 @@ import BalanceLabel from '../../components/BalanceLabel';
 import EntrySummary from '../../components/EntrySummary';
 import EntryList from '../../components/EntryList';
 import RelativeDaysModal from '../../components/RelativeDaysModal';
+import CategoryModal from '../../components/CategoryModal';
 
 import Colors from '../../styles/Colors';
 
@@ -27,8 +28,17 @@ const Report = ({navigation}) => {
     onRelativeDaysClosePress();
   };
 
+  const onCategoryPress = item => {
+    setCategory(item);
+    onCategoryClosePress();
+  };
+
   const onRelativeDaysClosePress = () => {
     setRelativeDaysModalVisible(false);
+  };
+
+  const onCategoryClosePress = () => {
+    setCategoryModalVisible(false);
   };
 
   LogBox.ignoreLogs(['Picker']);
@@ -58,7 +68,9 @@ const Report = ({navigation}) => {
 
         <TouchableOpacity
           style={styles.filterButton}
-          onPress={() => {}}
+          onPress={() => {
+            setCategoryModalVisible(true);
+          }}
           >
           <Text style={styles.filterButtonText}>{category.name}</Text>
           <Icon
@@ -67,11 +79,17 @@ const Report = ({navigation}) => {
             color={Colors.champagneDark}
           />
         </TouchableOpacity>
+        <CategoryModal 
+          categoryType="all"
+          isVisible= {categoryModalVisible}
+          onConfirm={onCategoryPress}
+          onCancel={onCategoryClosePress}
+        />
       </View>
 
       <ScrollView>
         <EntrySummary />
-        <EntryList days={relativeDays} />
+        <EntryList days={relativeDays} category={category} />
       </ScrollView>
 
       <ActionFooter>
