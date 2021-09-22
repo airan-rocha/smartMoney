@@ -1,4 +1,4 @@
-Aula 22:00 min
+Aula 00:00 min
 
 ---------
 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
@@ -68,7 +68,15 @@ npm install react-native-rename -g
 **como usar:
 npx react-native-rename "Smart Money" -b br.com.rochaairan.smartmoney_beta
 
+----------------
+Gráficos SVG para react-native
+https://github.com/JesperLekland/react-native-svg-charts
 
+
+*****************************
+Gráficos em JS
+https://d3js.org/
+https://github.com/d3/d3/wiki
 
 *********************************************
 **React Native Box Shadow Generator - cria o codigo para o sobreamento.
@@ -197,3 +205,7 @@ LogBox.ignoreLogs(['Warning: ...']);
 
 // Ignore all log notifications:
 LogBox.ignoreAllLogs();
+
+*****************************
+Lógic Hooks
+https://pt-br.reactjs.org/docs/hooks-custom.html
