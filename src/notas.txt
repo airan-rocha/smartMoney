@@ -69,6 +69,11 @@ npm install react-native-rename -g
 npx react-native-rename "Smart Money" -b br.com.rochaairan.smartmoney_beta
 
 ----------------
+https://lodash.com/
+
+yarn add lodash
+
+----------------
 Gráficos SVG para react-native
 https://github.com/JesperLekland/react-native-svg-charts
 
