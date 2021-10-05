@@ -46,7 +46,7 @@ export const getBalanceSumByDate = async days => {
     });
 
     console.log("\n\n getBalanceSumByDate() --->");
-    console.log(JSON.stringify(entries));
+    console.log("getBalanceSumByDate :: ", JSON.stringify(entries));
 
     return entries;
 };
@@ -65,3 +65,36 @@ export const getBalanceSumByDate = async days => {
   // D -3 = saldo do dia + D -4
   // D -2 = saldo do dia + D -3
   // D -1 = saldo do dia + D -2
+
+export const getBalanceSumByCategory = async (days, showOthers = true) => {
+    const realm = await getRealm();
+
+    let entries = realm.objects('Entry');
+
+    if(days > 0){
+        const date = moment()
+        .subtract(days, 'days')
+        .toDate();
+
+        entries = entries.filtered('entryAt >= $0', date);
+    }
+
+    // entries = entries.sorted('entryAt');
+
+    entries = _(entries).groupBy(({category:{id}}) => id)
+
+    console.log("getBalanceSumByCategory :: ", JSON.stringify(entries));
+
+    return entries;
+};
+
+// salario 1000 - 19/11
+// aluguel -900 - 19/11
+// compras -10 - 21/11
+// compras -20 - 22/11
+
+// [
+//     {category: "Salário", amout: 1000}
+//     {category: "Aluguel", amout: -900}
+//     {category: "Compras", amout: -30}
+// ]
