@@ -81,9 +81,16 @@ export const getBalanceSumByCategory = async (days, showOthers = true) => {
 
     // entries = entries.sorted('entryAt');
 
-    entries = _(entries).groupBy(({category:{id}}) => id)
+    entries = _(entries)
+    .groupBy(({category:{id}}) => id)
+    .map(entry => ({
+        category: _.omit(entry[0].category, 'entries'),
+        amount: Math.abs(_.sumBy(entry, 'amount')),
+    }))
+    .filter(({amount}) => amount > 0)
+    .orderBy('amount', 'desc');
 
-    console.log("getBalanceSumByCategory :: ", JSON.stringify(entries));
+    console.log("\n\ngetBalanceSumByCategory :: ", JSON.stringify(entries));
 
     return entries;
 };
